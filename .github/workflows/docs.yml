@@ -33,10 +33,10 @@ jobs:
 
       - name: Build HTML docs
         run: |
-          poetry run make -C docs html
+            poetry run sphinx-build -b html docs/source docs/build/html
 
       - name: Upload docs as artifact
         uses: actions/upload-artifact@v4
         with:
           name: site
-          path: docs/_build/html
+          path: docs/build/html
