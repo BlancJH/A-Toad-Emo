@@ -1,0 +1,40 @@
+name: Build Docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: |
+          poetry install
+
+      - name: Create docs folder
+        run: |
+          poetry run sphinx-quickstart -q -p "A-Toad-Emo" -a "BlancJH" --ext-autodoc docs
+          echo "import os, sys; sys.path.insert(0, os.path.abspath('./a_toad_emo'))" >> docs/conf.py
+
+      - name: Build HTML docs
+        run: |
+          poetry run make -C docs html
+
+      - name: Upload docs as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: docs/_build/html

@@ -32,6 +32,3 @@ jobs:
 
       - name: Run Tests
         run: poetry run pytest
-
-      - name: Build Sphinx docs
-        run: poetry run make -C docs html
