@@ -1,6 +1,6 @@
 platform: ios
 device_name: iPhone 16 Pro
-app_path: ./builds/my_app.ipa
+app_path: build/ios/iphonesimulator/Runner.app
 
 flows:
   - name: login

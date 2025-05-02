@@ -1,7 +1,7 @@
 import argparse
-from emulator_launcher import EmulatorLauncher
-from config_loader import load_config
-from app_installer import AppInstaller
+from a_toad_emo.emulator_launcher import EmulatorLauncher
+from a_toad_emo.config_loader import load_config
+from a_toad_emo.app_installer import AppInstaller
 
 def main():
     parser = argparse.ArgumentParser(description="A Toad Emo - Launch and Run Emulator.")
