@@ -24,10 +24,12 @@ jobs:
         run: |
           poetry install
 
-      - name: Create docs folder
+      - name: Create docs folder (if needed)
         run: |
-          poetry run sphinx-quickstart -q -p "A-Toad-Emo" -a "BlancJH" --ext-autodoc docs
-          echo "import os, sys; sys.path.insert(0, os.path.abspath('./a_toad_emo'))" >> docs/conf.py
+            if [ ! -d docs ]; then
+                poetry run sphinx-quickstart -q -p "A-Toad-Emo" -a "BlancJH" --ext-autodoc docs
+                echo "import os, sys; sys.path.insert(0, os.path.abspath('./a_toad_emo'))" >> docs/conf.py
+            fi
 
       - name: Build HTML docs
         run: |
