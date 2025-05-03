@@ -24,7 +24,7 @@ def main():
         if not app_path:
             raise ValueError("Config must include 'app_path' when install_app is true.")
         installer = AppInstaller()
-        installer.install(platform=platform, device_name=device_name, app_path=app_path)
+        installer.target_app_install(platform=platform, device_name=device_name, app_path=app_path)
 
 if __name__ == "__main__":
     main()
