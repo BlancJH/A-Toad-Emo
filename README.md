@@ -2,3 +2,5 @@
 
 ![CI](https://github.com/BlancJH/A-Toad-Emo/actions/workflows/ci.yml/badge.svg)
 ![GitHub release](https://img.shields.io/github/v/tag/BlancJH/A-Toad-Emo)
+
+![Alt Text](assets/images/a-toad-emo.png)
