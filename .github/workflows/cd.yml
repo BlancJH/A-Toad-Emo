@@ -1,8 +1,9 @@
 name: A-Toad-Emo CD
 
 on:
-  push:
-    branches: [main]
+    push:
+      tags:
+        - 'v*.*.*'
 
 jobs:
   check-tag-and-publish:
