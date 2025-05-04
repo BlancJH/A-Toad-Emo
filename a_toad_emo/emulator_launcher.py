@@ -3,7 +3,7 @@ import subprocess
 class EmulatorLauncher:
     """Launches a mobile emulator or simulator for Android or iOS platforms."""
 
-    def launch(self, platform: str, device_name: str, headless: bool = False) -> None:
+    def launch(self, platform: str, device_name: str, headless: bool = True) -> None:
         """Launches the specified mobile emulator or simulator.
 
         Args:
@@ -24,6 +24,8 @@ class EmulatorLauncher:
                 print(f"Android emulator '{device_name}' launched successfully.")
 
             elif platform == 'ios':
+                if not headless:
+                    subprocess.run(['open', '-a', 'Simulator'], check=True)
                 subprocess.run(['xcrun', 'simctl', 'boot', device_name], check=True)
                 print(f"iOS simulator '{device_name}' launched successfully.")
 
