@@ -1,0 +1,45 @@
+name: A-Toad-Emo CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  check-tag-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if not a tag
+        run: |
+          if [[ "${GITHUB_REF}" != refs/tags/v* ]]; then
+            echo "This push to 'main' is not a version tag. Please tag the release first."
+            exit 1
+          fi
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Configure Poetry
+        run: |
+          poetry config virtualenvs.in-project true
+          poetry config installer.max-workers 10
+
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
+
+      - name: Build the package
+        run: poetry build
+
+      - name: Publish to PyPI
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}
+        run: poetry publish --no-interaction --username __token__ --password $POETRY_PYPI_TOKEN_PYPI
