@@ -5,15 +5,16 @@ from a_toad_emo.app_installer import AppInstaller
 from a_toad_emo.app_runner import AppRunner
 
 def main():
-    parser = argparse.ArgumentParser(description="A Toad Emo - Launch and Run Emulator.")
+    parser = argparse.ArgumentParser(description="A Toad Emo - Auto App Demo generate tool.")
     parser.add_argument(
         "--headless",
-        type=str,
+        type=str.lower,
         choices=["true", "false"],
         default="true",
         help="Run emulator in headless mode (default: true)"
     )
     args = parser.parse_args()
+    headless = args.headless == "true"
 
     config = load_config()
     platform = config.get("platform")
@@ -27,7 +28,7 @@ def main():
 
     # 1. Launch Emulator
     launcher = EmulatorLauncher()
-    launcher.launch(platform=platform, device_name=device_name, headless=args.headless)
+    launcher.launch(platform=platform, device_name=device_name, headless=headless)
 
     # 2. Install the target app
     if install_app:
