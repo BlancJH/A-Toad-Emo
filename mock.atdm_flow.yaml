@@ -8,3 +8,13 @@ flows:
     inputs:
       username: test@example.com
       password: secret123
+    steps:
+      - fill:
+          selector: username_field
+          text_from_input: username
+      - fill:
+          selector: password_field
+          text_from_input: password
+      - tap: login_button
+      - wait: 2
+      - screenshot: after_login
