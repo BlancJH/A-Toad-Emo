@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "a-toad-emo"
-version = "0.1.6"
+version = "0.1.7"
 description = "A CLI Tool to generate mobile applications demo video automatically."
 authors = ["BlancJH"]
 license = "MIT"
