@@ -41,5 +41,12 @@ def main():
     runner = AppRunner()
     runner.run_app(platform=platform, app_path=app_path, app_id=app_id)
 
+    # 4. Execute flow steps
+    flow_steps = config.get("flow", [])
+    if not flow_steps:
+        raise ValueError("No 'flow' steps found in config file.")
+    else:
+        print(f"[INFO] Successfully loaded {len(flow_steps)} flow step(s) from config.")
+
 if __name__ == "__main__":
     main()
