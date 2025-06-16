@@ -3,6 +3,7 @@ from a_toad_emo.emulator_launcher import EmulatorLauncher
 from a_toad_emo.config_loader import load_config
 from a_toad_emo.app_installer import AppInstaller
 from a_toad_emo.app_runner import AppRunner
+from a_toad_emo.flow_executor import FlowExecutor
 
 def main():
     parser = argparse.ArgumentParser(description="A Toad Emo - Auto App Demo generate tool.")
@@ -41,12 +42,18 @@ def main():
     runner = AppRunner()
     runner.run_app(platform=platform, app_path=app_path, app_id=app_id)
 
-    # 4. Execute flow steps
+    # 4. Config flow
     flow_steps = config.get("flow", [])
     if not flow_steps:
         raise ValueError("No 'flow' steps found in config file.")
     else:
         print(f"[INFO] Successfully loaded {len(flow_steps)} flow step(s) from config.")
+
+    inputs = config.get("inputs", {})
+
+    # 5. Execute flow steps
+    executor = FlowExecutor(platform, device_name)
+    executor.run_steps(flow_steps, inputs)
 
 if __name__ == "__main__":
     main()
