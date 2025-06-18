@@ -44,4 +44,3 @@ jobs:
         env:
             POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PIPY_API_SECRET }}
         run: poetry publish --no-interaction
-        
